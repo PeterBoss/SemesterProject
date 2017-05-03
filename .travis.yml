@@ -7,4 +7,4 @@ cache:
 env:
     - TEST_DIR=Backend
 script:
-  cd $TEST_DIR && - mvn verify
+  cd $TEST_DIR && mvn verify
