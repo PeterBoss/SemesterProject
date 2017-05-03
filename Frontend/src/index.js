@@ -4,6 +4,7 @@ import './styles/index.css';
 import { hashHistory, Router, Route, IndexRoute } from 'react-router'
 import App from './pages/App';
 import Home from './pages/Home';
+import Search from './pages/SearchPage';
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import About from "./pages/About";
@@ -26,6 +27,7 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
+      <Route path="search" component={Search} />
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="about" component={About} />

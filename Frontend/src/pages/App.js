@@ -17,6 +17,7 @@ const App = observer(class App extends Component {
               <a className="navbar-brand" href="#">Semester Seed</a>
             </div>
             <ul className="nav navbar-nav">
+              <li><Link to="/search">Search</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/user">Page for Users </Link></li>
               <li><Link to="/admin">Page for Admins</Link></li>
