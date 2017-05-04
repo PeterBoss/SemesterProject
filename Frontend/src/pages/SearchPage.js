@@ -4,9 +4,13 @@
 import React, {Component} from 'react'
 
 class SearchPage extends Component{
+
+
+  
    render(){
        return(
            <div>
+               <h1>Find billige rejser på tværs af tusindvis af flyselskaber og rejsesider</h1>
                <form>
 
                    <select id ="from">
@@ -32,7 +36,7 @@ class SearchPage extends Component{
                        <option value="11">11</option>
                        <option value="12">12</option>
                    </select>
-                   <input type="submit" value="Submit" onChange=""/>
+                   <input type="submit" value="Search" onChange=""/>
                </form>
            </div>
 
