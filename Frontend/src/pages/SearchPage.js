@@ -9,6 +9,7 @@ class SearchPage extends Component{
            <div>
                <form>
 
+
                    <select id ="from">
                        <option value ="SXF">Berlin</option>
                        <option value ="CPH">Copenhagen</option>
@@ -16,6 +17,15 @@ class SearchPage extends Component{
                        <option value ="CDG">Paris</option>
                        <option value ="BCN">Barcelona</option>
                    </select>
+
+                   <select id ="to">
+                       <option value ="SXF">Berlin</option>
+                       <option value ="CPH">Copenhagen</option>
+                       <option value ="STN">London</option>
+                       <option value ="CDG">Paris</option>
+                       <option value ="BCN">Barcelona</option>
+                   </select>
+
                    <input id="date" type="date"/>
 
                    <select id="seat">
