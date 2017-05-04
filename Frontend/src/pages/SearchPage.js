@@ -1,9 +1,33 @@
 /**
  * Created by mahnaz on 04-05-2017.
  */
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+const URL = require("../../package.json").serverURL;
+
 
 class SearchPage extends Component{
+
+    mySearch(){
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+        var date = document.getElementById("date").value;
+        var seat = document.getElementById("seat").value;
+
+
+     var newUrl = URL + 'api/flightinfo/' + from + '/'+ date +'/'+ seat;
+    console.log("newUrl: "+newUrl);
+
+    // fetch(newUrl, 'GET')
+    //     .then((res) => {
+    //         return res.json();
+    //     })
+    //     .then((res) => {
+    //         this.setData(res);
+    //         console.log(res);
+    //     })
+}
+
+
 
 
   
@@ -13,21 +37,22 @@ class SearchPage extends Component{
                <h1>Find billige rejser på tværs af tusindvis af flyselskaber og rejsesider</h1>
                <form>
 
-
-                   <select id ="from">
-                       <option value ="SXF">Berlin</option>
-                       <option value ="CPH">Copenhagen</option>
-                       <option value ="STN">London</option>
-                       <option value ="CDG">Paris</option>
-                       <option value ="BCN">Barcelona</option>
+                   <select id="from">
+                       <option value="" disabled>Select origin</option>
+                       <option value="SXF">Berlin</option>
+                       <option value="CPH">Copenhagen</option>
+                       <option value="STN">London</option>
+                       <option value="CDG">Paris</option>
+                       <option value="BCN">Barcelona</option>
                    </select>
 
-                   <select id ="to">
-                       <option value ="SXF">Berlin</option>
-                       <option value ="CPH">Copenhagen</option>
-                       <option value ="STN">London</option>
-                       <option value ="CDG">Paris</option>
-                       <option value ="BCN">Barcelona</option>
+                   <select id="to">
+                       <option value="" disabled>Select destination</option>
+                       <option value="SXF">Berlin</option>
+                       <option value="CPH">Copenhagen</option>
+                       <option value="STN">London</option>
+                       <option value="CDG">Paris</option>
+                       <option value="BCN">Barcelona</option>
                    </select>
 
                    <input id="date" type="date"/>
@@ -46,11 +71,11 @@ class SearchPage extends Component{
                        <option value="11">11</option>
                        <option value="12">12</option>
                    </select>
-                   <input type="submit" value="Search" onChange=""/>
+                   <input type="submit" value="Search" onClick={this.mySearch}/>
                </form>
            </div>
 
        )
    }
 }
-export default SearchPage
+export default SearchPage;
