@@ -2,6 +2,8 @@
  * Created by mahnaz on 04-05-2017.
  */
 import React, {Component} from 'react';
+import fetchHelper from "../stores/fetchHelpers"
+
 const URL = require("../../package.json").serverURL;
 
 
@@ -10,21 +12,28 @@ class SearchPage extends Component{
     mySearch(){
         var from = document.getElementById("from").value;
         var to = document.getElementById("to").value;
-        var date = document.getElementById("date").value;
+        var date = new Date(document.getElementById("date").value);
         var seat = document.getElementById("seat").value;
+        var dateString = JSON.stringify(date);
 
 
-     var newUrl = URL + 'api/flightinfo/' + from + '/'+ date +'/'+ seat;
+
+     var newUrl = URL + 'api/flights/' + from + '/'+ JSON.parse(dateString) +'/'+ seat;
     console.log("newUrl: "+newUrl);
 
-    // fetch(newUrl, 'GET')
-    //     .then((res) => {
-    //         return res.json();
-    //     })
-    //     .then((res) => {
-    //         this.setData(res);
-    //         console.log(res);
-    //     })
+
+
+    fetch(newUrl, fetchHelper.makeOptions("GET", false))
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            //this.setData(res);
+            console.log(res);
+        })
+
+
+
 }
 
 
