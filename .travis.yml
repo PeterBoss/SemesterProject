@@ -4,7 +4,6 @@ jdk: oraclejdk8
 cache:
   directories:
     - $HOME/.m2
-env:
-    - TEST_DIR=Backend
+    
 script:
-  cd $TEST_DIR && mvn verify
+  cd Backend && mvn verify
