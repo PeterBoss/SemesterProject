@@ -59,14 +59,20 @@ public class FlightinfoService {
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson(@PathParam("from") String from,@PathParam("date") String date,@PathParam("seats") String seats) {
         StringBuffer response = null;
+        String json ="[";
         try {
             //TODO return proper representation object
             
             List<String> list = new ArrayList();
             String lars = "http://airline-plaul.rhcloud.com/api/flightinfo/";
+            String us = "http://airline-plaul.rhcloud.com/api/flightinfo/";
             list.add(lars);
+            list.add(us);
             String url=null;
+            
+            
             for (String string : list) {
+                
                 url = string +from+"/"+date+"/"+seats;
             
             URL obj = new URL(url);
@@ -90,6 +96,13 @@ public class FlightinfoService {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
+            if (json.length()>1){
+            json += ",";
+            }
+            if (response.length()>0){
+                json +=response.toString();
+            }
+            
             in.close();
             
             //print result
@@ -104,7 +117,8 @@ public class FlightinfoService {
         } catch (IOException ex) {
             Logger.getLogger(FlightinfoService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return response.toString(); //placeholder
+        json += "]";
+        return json; //placeholder
     }
 
     /**

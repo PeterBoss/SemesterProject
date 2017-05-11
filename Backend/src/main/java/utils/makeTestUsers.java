@@ -16,6 +16,7 @@ public class makeTestUsers {
   public static void main(String[] args) {
     EntityManager em = Persistence.createEntityManagerFactory(PU.getPersistenceUnitName()).createEntityManager();
     try {
+        Persistence.generateSchema(PU.getPersistenceUnitName(),null);
       em.getTransaction().begin();
       int deleteCount = em.createQuery("DELETE FROM SEED_USER u").executeUpdate();
       //System.out.println("Deleted (from User): " + deleteCount);

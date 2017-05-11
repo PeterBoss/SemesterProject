@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -24,45 +27,75 @@ public class Flight implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String from;
-    private String to;
-    private Date date;
-    private int set;
-    private List<Flight> flights;
+    
+    private String flightNumber;
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public List<FlightInstance> getFlightInstances() {
+        return flightInstances;
+    }
+
+    public void setFlightInstances(List<FlightInstance> flightInstances) {
+        this.flightInstances = flightInstances;
+    }
+
+    public Airport getFromAirport() {
+        return fromAirport;
+    }
+
+    public void setFromAirport(Airport fromAirport) {
+        this.fromAirport = fromAirport;
+    }
+
+    public Airport getToAirport() {
+        return toAirport;
+    }
+
+    public void setToAirport(Airport toAirport) {
+        this.toAirport = toAirport;
+    }
+
+    public Date getfTime() {
+        return fTime;
+    }
+
+    public void setfTime(Date fTime) {
+        this.fTime = fTime;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
+    @OneToMany(mappedBy = "flight")
+    private List<FlightInstance> flightInstances;
+    
+    @ManyToOne
+    private Airport fromAirport;
+    @ManyToOne
+    private Airport toAirport;
+    
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fTime;
+    private int seats;
+   // private List<Flight> flights;
     public Flight() {
     }
+    
+    
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getSet() {
-        return set;
-    }
-
-    public void setSet(int set) {
-        this.set = set;
-    }
     
     
          
@@ -74,12 +107,7 @@ public class Flight implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+
 
     @Override
     public boolean equals(Object object) {
@@ -94,9 +122,6 @@ public class Flight implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "entity.FlightInfo[ id=" + id + " ]";
-    }
-    
+
+
 }
