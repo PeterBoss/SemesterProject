@@ -29,7 +29,7 @@ ReactDOM.render((
         <Route path="/" component={App}>
             <IndexRoute component={Home}/>
             <Route path="search" component={Search}/>
-            <Route path="reservation" component={Reservation}/>
+            <Route path="reservation/:id/:seats" component={Reservation}/>
             <Route path="login" component={Login}/>
             <Route path="logout" component={Logout}/>
             <Route path="about" component={About}/>

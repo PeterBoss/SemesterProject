@@ -18,20 +18,7 @@ class SearchPage extends Component {
 
         this.setData = this.setData.bind(this);
         this.mySearch = this.mySearch.bind(this);
-        this.reserve = this.reserve.bind(this);
-    }
 
-    reserve = (event) => {
-
-        var flightId = event.target.id;
-        var options = fetchHelper.makeOptions("POST", true, flightId);
-        var newUrl = URL + 'api/reservation/' + flightId;
-
-
-        fetch(newUrl, options)
-            .then((res) => {
-                return res.json();
-            })
     }
 
     @action
@@ -71,7 +58,7 @@ class SearchPage extends Component {
     }
 
     eventHandler = (event) => {
-        console.log(event.target);
+        console.log(event.target.id);
     }
 
 
@@ -84,7 +71,7 @@ class SearchPage extends Component {
                 <td>{flight.date}</td>
                 <td>{flight.totalPrice}</td>
                 <td>
-                    <Link to="reservation" onClick={this.eventHandler} id={flight.flightID}>Reserve</Link>
+                    <Link to={"reservation/"+flight.flightID+"/"+flight.numberOfSeats} onClick={this.eventHandler} id={flight.flightID}>Reserve</Link>
                 </td>
             </tr>);
         });
