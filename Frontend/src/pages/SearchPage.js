@@ -15,7 +15,22 @@ class SearchPage extends Component {
         super();
         this.setData = this.setData.bind(this);
         this.mySearch= this.mySearch.bind(this);
+        this.reserve = this.reserve.bind(this);
     }
+
+    reserve = (event) => {
+
+        var flightId = event.target.id;
+
+       var options = fetchHelper.makeOptions("POST", true, flightId);
+        var newUrl = URL + 'api/reservation/' + flightId;
+
+
+            fetch(newUrl, options)
+                .then((res) => {
+                    return res.json();
+                })
+        }
 
     @action
     mySearch(e) {
@@ -28,7 +43,6 @@ class SearchPage extends Component {
 
         var newUrl = URL + 'api/flights/' + from + '/' + JSON.parse(dateString) + '/' + seat;
         console.log("newUrl: " + newUrl);
-
 
         fetch(newUrl, fetchHelper.makeOptions("GET", false))
 
@@ -58,7 +72,7 @@ class SearchPage extends Component {
     render() {
         var flightInfo = this.flights;
         var lines = flightInfo.map((airline)=>{
-            return airline.flights.map((flight, index)=> <tr key={index}><td>{flight.flightID}</td><td>{flight.numberOfSeats}</td><td>{flight.date}</td><td>{flight.totalPrice}</td></tr>);
+            return airline.flights.map((flight, index)=> <tr key={index}><td>{flight.flightID}</td><td>{flight.numberOfSeats}</td><td>{flight.date}</td><td>{flight.totalPrice}</td><td><button onClick={this.reserve} id={flight.flightID}>reservation</button></td></tr>);
         });
         return (
             <div>
@@ -114,6 +128,7 @@ class SearchPage extends Component {
                     </thead>
                     <tbody id="userTable">
                     {lines}
+
                     </tbody>
                 </table>
 
