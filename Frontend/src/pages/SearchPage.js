@@ -2,6 +2,7 @@
  * Created by mahnaz on 04-05-2017.
  */
 import React, {Component} from 'react';
+import { Link } from "react-router";
 import fetchHelper from "../stores/fetchHelpers"
 import {observable, action, computed} from "mobx";
 import {observer} from "mobx-react";
@@ -69,6 +70,10 @@ class SearchPage extends Component {
         this._flights.replace(res)
     }
 
+    eventHandler = (event) => {
+        console.log(event.target);
+    }
+
 
     render() {
         var flightInfo = this.flights;
@@ -79,7 +84,7 @@ class SearchPage extends Component {
                 <td>{flight.date}</td>
                 <td>{flight.totalPrice}</td>
                 <td>
-                    <button onClick={this.reserve} id={flight.flightID}>reservation</button>
+                    <Link to="reservation" onClick={this.eventHandler} id={flight.flightID}>Reserve</Link>
                 </td>
             </tr>);
         });

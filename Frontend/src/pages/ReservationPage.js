@@ -8,10 +8,12 @@ class ReservationPage extends Component {
 
     constructor(props) {
         super(props);
+
+
         this.state = {
             reservation: {
-                flightID: this.props.flightID,
-                numberOfSeats: this.props.numberOfSeats,
+                flightID: "",
+                numberOfSeats: "",
                 reserveeName: "",
                 reserveePhone: "",
                 reserveeEmail: "",
@@ -21,16 +23,26 @@ class ReservationPage extends Component {
 
     }
 
+
+    updateReservation = (event) => {
+        console.log(event.target.value);
+    }
+
+
     render() {
 
         return (
             <div>
-                <form onSubmit={}>
-                    <input type="text" id="nameInput" defaultValue="Name"/>
-                    <input type="text" id="phoneInput" defaultValue="Phone"/>
-                    <input type="email" id="emailInput" defaultValue="Email"/>
+                <form>
+                    <input type="text" id="nameInput" placeholder="Name"/>
+                    <br/>
+                    <input type="text" id="phoneInput" placeholder="Phone"/>
+                    <br/>
+                    <input type="email" onChange={this.updateReservation} id="emailInput" placeholder="Email"/>
+                    <br/>
                     <button type="submit" id="submitButton">Submit</button>
                 </form>
+                <p>{JSON.stringify(this.state.reservation)}</p>
             </div>
         )
     }
