@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import fetchHelper from "../stores/fetchHelpers"
 import {observable, action, computed} from "mobx";
 import {observer} from "mobx-react";
+const URL = require("../../package.json").serverURL;
 
 @observer
 class ReservationPage extends Component {
 
     constructor(props) {
         super(props);
+
         this.sendReservation = this.sendReservation.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
-        var amount = props.params.seats;
+
+       // var amount = props.params.seats;
 
         this.state = {
                 flightID: props.params.id,
@@ -39,12 +42,11 @@ class ReservationPage extends Component {
 
     sendReservation = (event) => {
 
-        console.log(this.state);
+        var flightId = this.state.flightID;
 
+        var reservationsInfo =  this.state;
 
-        var flightId = event.target.id;
-
-        var options = fetchHelper.makeOptions("POST", true, this.state);
+        var options = fetchHelper.makeOptions("POST", true, reservationsInfo);
         var newUrl = URL + 'api/reservation/' + flightId;
 
         fetch(newUrl, options)
@@ -67,7 +69,7 @@ class ReservationPage extends Component {
         }
         passengerFields.map((line, idx)=>{ <div key={idx}>{line}</div>});
         return (
-            //for (var i = 0; i < 3; i++) {
+
 
             <div>
                 <form>
@@ -79,13 +81,12 @@ class ReservationPage extends Component {
                     <br/>
                     <br/>
                     { passengerFields}
-                    <button type="submit" onClick={this.sendReservation} id="submitButton">Submit</button>
+                    <button type="submit" onClick={this.sendReservation}>Submit</button>
                 </form>
                 <p>{JSON.stringify(this.state)}</p>
             </div>
 
         )
-        //}
 
     }
 }

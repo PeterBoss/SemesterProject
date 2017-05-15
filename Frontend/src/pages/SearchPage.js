@@ -57,9 +57,6 @@ class SearchPage extends Component {
         this._flights.replace(res)
     }
 
-    eventHandler = (event) => {
-        console.log(event.target.id);
-    }
 
 
     render() {
@@ -71,7 +68,7 @@ class SearchPage extends Component {
                 <td>{flight.date}</td>
                 <td>{flight.totalPrice}</td>
                 <td>
-                    <Link to={"reservation/"+flight.flightID+"/"+flight.numberOfSeats} onClick={this.eventHandler} id={flight.flightID}>Reserve</Link>
+                    <Link to={"reservation/"+flight.flightID+"/"+flight.numberOfSeats} id={flight.flightID}>Reserve</Link>
                 </td>
             </tr>);
         });
