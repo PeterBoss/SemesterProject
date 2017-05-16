@@ -7,7 +7,7 @@ import fetchHelper from "../stores/fetchHelpers"
 import {observable, action, computed} from "mobx";
 import {observer} from "mobx-react";
 
-const URL = require("../../package.json").serverURL;
+                                const URL = require("../../package.json").serverURL;
 
 @observer
 class SearchPage extends Component {

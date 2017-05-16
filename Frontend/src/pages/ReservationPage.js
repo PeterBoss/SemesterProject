@@ -47,7 +47,7 @@ class ReservationPage extends Component {
         var reservationsInfo =  this.state;
 
         var options = fetchHelper.makeOptions("POST", true, reservationsInfo);
-        var newUrl = URL + 'api/reservation/' + flightId;
+        var newUrl = URL + 'api/flights/reservation/' + flightId;
 
         fetch(newUrl, options)
             .then((res) => {

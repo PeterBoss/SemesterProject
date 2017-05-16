@@ -121,20 +121,11 @@ public class FlightinfoService {
         return json; //placeholder
     }
 
-    /**
-     * PUT method for updating or creating an instance of FlightinfoService
-     * @param content representation for the resource
-     */
-    @PUT
-    
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
     @POST
     @Path("reservation/{flightid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void postJson(String content,@PathParam("flightid") String flightid) {
+    public void postJson(String content,@PathParam("flightid") Integer flightid) {
         
 // Parse JSONobject
 //gson.fromJson(content, Klasse til indkommende reservationer)
