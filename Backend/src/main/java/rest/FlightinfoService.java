@@ -128,24 +128,21 @@ public class FlightinfoService {
         return json; //placeholder
     }
 
-<<<<<<< HEAD
-=======
-   
->>>>>>> 208fb47839a663714d63b027a2cf8e1aa59e754f
+
     @POST
     @Path("reservation/{flightid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-<<<<<<< HEAD
-    public void postJson(String content,@PathParam("flightid") Integer flightid) {
+
+  
         
 // Parse JSONobject
 //gson.fromJson(content, Klasse til indkommende reservationer)
-=======
+
     public String postJson(String content, @PathParam("flightid") String flightid) {
 
         Reservation reservation = gson.fromJson(content, Reservation.class);
->>>>>>> 208fb47839a663714d63b027a2cf8e1aa59e754f
+
         
         return gson.toJson(reservation);
         

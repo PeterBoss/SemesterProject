@@ -76,6 +76,7 @@ class SearchPage extends Component {
             <div>
                 <h1>Find billige rejser på tværs af tusindvis af flyselskaber og rejsesider</h1>
                 <form>
+                    <label>  from  </label>
 
                     <select id="from">
                         <option value="" disabled>Select origin</option>
@@ -85,6 +86,7 @@ class SearchPage extends Component {
                         <option value="CDG">Paris</option>
                         <option value="BCN">Barcelona</option>
                     </select>
+                    <label>  to  </label>
 
                     <select id="to">
                         <option value="" disabled>Select destination</option>
@@ -94,8 +96,11 @@ class SearchPage extends Component {
                         <option value="CDG">Paris</option>
                         <option value="BCN">Barcelona</option>
                     </select>
+                    <label>  dato  </label>
 
                     <input id="date" type="date"/>
+
+                    <label>  seats  </label>
 
                     <select id="seat">
                         <option value="1">1</option>

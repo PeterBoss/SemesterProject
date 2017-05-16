@@ -48,11 +48,9 @@ class ReservationPage extends Component {
         console.log(reservationsInfo);
         var options = fetchHelper.makeOptions("POST", true, reservationsInfo);
         var newUrl = URL + 'api/flights/reservation/' + flightId;
-<<<<<<< HEAD
 
-=======
         console.log(newUrl);
->>>>>>> 208fb47839a663714d63b027a2cf8e1aa59e754f
+
         fetch(newUrl, options)
             .then((res) => {
                 return res.json();
