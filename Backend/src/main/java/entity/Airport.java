@@ -20,15 +20,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class Airport implements Serializable {
 
-    @OneToMany(mappedBy = "toAirport")
+    @OneToMany(mappedBy = "destination")
     private List<Flight> flightsArriving;
 
-    @OneToMany(mappedBy = "fromAirport")
+    @OneToMany(mappedBy = "destination")
     private List<Flight> flightsDeparting;
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String IATACode;
     private String timeZone; //???
@@ -40,9 +39,6 @@ public class Airport implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getIATACode() {
         return IATACode;
@@ -84,31 +80,5 @@ public class Airport implements Serializable {
         this.city = city;
     }
     
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Airport)) {
-            return false;
-        }
-        Airport other = (Airport) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entity.Airport[ id=" + id + " ]";
-    }
     
 }
