@@ -6,6 +6,7 @@
 package rest;
 
 import com.google.gson.Gson;
+import entity.Reservation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,6 +35,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("flights")
 public class FlightinfoService {
+
     private final String USER_AGENT = "Mozilla/5.0";
     private static Gson gson;
 
@@ -46,9 +48,16 @@ public class FlightinfoService {
     public FlightinfoService() {
         gson = new Gson();
     }
-
+    
+    @GET
+    public String testGet() {
+        return "TEST";
+    }
+    
+    
     /**
      * Retrieves representation of an instance of rest.FlightinfoService
+     *
      * @param from
      * @param date
      * @param seats
@@ -57,61 +66,59 @@ public class FlightinfoService {
     @GET
     @Path("{from}/{date}/{seats}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("from") String from,@PathParam("date") String date,@PathParam("seats") String seats) {
+    public String getJson(@PathParam("from") String from, @PathParam("date") String date, @PathParam("seats") String seats) {
         StringBuffer response = null;
-        String json ="[";
+        String json = "[";
         try {
             //TODO return proper representation object
-            
+
             List<String> list = new ArrayList();
             String lars = "http://airline-plaul.rhcloud.com/api/flightinfo/";
             String us = "http://airline-plaul.rhcloud.com/api/flightinfo/";
             list.add(lars);
             list.add(us);
-            String url=null;
-            
-            
+            String url = null;
+
             for (String string : list) {
-                
-                url = string +from+"/"+date+"/"+seats;
-            
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            
-            // optional default is GET
-            con.setRequestMethod("GET");
-            
-            //add request header
-            con.setRequestProperty("User-Agent", USER_AGENT);
-            
-            int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'GET' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
-            
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            response = new StringBuffer();
-            
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+
+                url = string + from + "/" + date + "/" + seats;
+
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                // optional default is GET
+                con.setRequestMethod("GET");
+
+                //add request header
+                con.setRequestProperty("User-Agent", USER_AGENT);
+
+                int responseCode = con.getResponseCode();
+                System.out.println("\nSending 'GET' request to URL : " + url);
+                System.out.println("Response Code : " + responseCode);
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                if (json.length() > 1) {
+                    json += ",";
+                }
+                if (response.length() > 0) {
+                    json += response.toString();
+                }
+
+                in.close();
+
+                //print result
+                System.out.println(response.toString());
+
+                // **Gem informationer fra forbindelsen**
             }
-            if (json.length()>1){
-            json += ",";
-            }
-            if (response.length()>0){
-                json +=response.toString();
-            }
-            
-            in.close();
-            
-            //print result
-            System.out.println(response.toString());
-            
-            
-            // **Gem informationer fra forbindelsen**
-            }
-            
+
         } catch (MalformedURLException ex) {
             Logger.getLogger(FlightinfoService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -121,15 +128,26 @@ public class FlightinfoService {
         return json; //placeholder
     }
 
+<<<<<<< HEAD
+=======
+   
+>>>>>>> 208fb47839a663714d63b027a2cf8e1aa59e754f
     @POST
     @Path("reservation/{flightid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
     public void postJson(String content,@PathParam("flightid") Integer flightid) {
         
 // Parse JSONobject
 //gson.fromJson(content, Klasse til indkommende reservationer)
+=======
+    public String postJson(String content, @PathParam("flightid") String flightid) {
+
+        Reservation reservation = gson.fromJson(content, Reservation.class);
+>>>>>>> 208fb47839a663714d63b027a2cf8e1aa59e754f
         
+        return gson.toJson(reservation);
         
         // Gem vha facadekald
     }

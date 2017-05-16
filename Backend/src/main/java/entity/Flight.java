@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -23,12 +19,29 @@ import javax.persistence.Temporal;
 @Entity
 public class Flight implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    
+    private String flightID;
     private String flightNumber;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date departureDate;
+    private Integer numberOfSeats;
+    private BigDecimal totalPrice;
+    private Integer travelTime;
+    @ManyToOne
+    private Airport origin;
+    @ManyToOne
+    private Airport destination;
+
+    public Flight() {
+    }
+
+    public Flight(String flightID) {
+        this.flightID = flightID;
+    }
+    
+    public String getFlightID() {
+        return flightID;
+    }
 
     public String getFlightNumber() {
         return flightNumber;
@@ -38,90 +51,54 @@ public class Flight implements Serializable {
         this.flightNumber = flightNumber;
     }
 
-    public List<FlightInstance> getFlightInstances() {
-        return flightInstances;
+    public Date getDepartureDate() {
+        return departureDate;
     }
 
-    public void setFlightInstances(List<FlightInstance> flightInstances) {
-        this.flightInstances = flightInstances;
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 
-    public Airport getFromAirport() {
-        return fromAirport;
+    public Integer getNumberOfSeats() {
+        return numberOfSeats;
     }
 
-    public void setFromAirport(Airport fromAirport) {
-        this.fromAirport = fromAirport;
+    public void setNumberOfSeats(Integer numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 
-    public Airport getToAirport() {
-        return toAirport;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setToAirport(Airport toAirport) {
-        this.toAirport = toAirport;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public Date getfTime() {
-        return fTime;
+    public Integer getTravelTime() {
+        return travelTime;
     }
 
-    public void setfTime(Date fTime) {
-        this.fTime = fTime;
+    public void setTravelTime(Integer travelTime) {
+        this.travelTime = travelTime;
     }
 
-    public int getSeats() {
-        return seats;
+    public Airport getOrigin() {
+        return origin;
     }
 
-    public void setSeats(int seats) {
-        this.seats = seats;
+    public void setOrigin(Airport origin) {
+        this.origin = origin;
     }
 
-    @OneToMany(mappedBy = "flight")
-    private List<FlightInstance> flightInstances;
-    
-    @ManyToOne
-    private Airport fromAirport;
-    @ManyToOne
-    private Airport toAirport;
-    
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fTime;
-    private int seats;
-   // private List<Flight> flights;
-    public Flight() {
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Airport destination) {
+        this.destination = destination;
     }
     
     
-
-    
-    
-         
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Flight)) {
-            return false;
-        }
-        Flight other = (Flight) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-
 
 }
