@@ -15,15 +15,15 @@ class ReservationPage extends Component {
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
 
-       // var amount = props.params.seats;
+        // var amount = props.params.seats;
 
         this.state = {
-                flightID: props.params.id,
-                numberOfSeats: props.params.seats,
-                reserveeName: "",
-                reserveePhone: "",
-                reserveeEmail: "",
-                passengers: []
+            flightID: props.params.id,
+            numberOfSeats: props.params.seats,
+            reserveeName: "",
+            reserveePhone: "",
+            reserveeEmail: "",
+            passengers: []
         }
 
     }
@@ -44,11 +44,11 @@ class ReservationPage extends Component {
 
         var flightId = this.state.flightID;
 
-        var reservationsInfo =  this.state;
-
+        var reservationsInfo = this.state;
+        console.log(reservationsInfo);
         var options = fetchHelper.makeOptions("POST", true, reservationsInfo);
-        var newUrl = URL + 'api/reservation/' + flightId;
-
+        var newUrl = URL + 'api/flights/reservation/' + flightId;
+        console.log(newUrl);
         fetch(newUrl, options)
             .then((res) => {
                 return res.json();
@@ -56,18 +56,21 @@ class ReservationPage extends Component {
     }
 
     render() {
-        const passengerField = <div><input type="text" id="passengerNameInput"
-                                           placeholder="passenger firstName"/><br/><input type="text"
-                                                                                          id="passengerLastNameInput"
-                                                                                          placeholder="passenger lastName"/><br/>
-
-
-            <br/></div>;
+        const passengerField =
+            <div>
+                <input type="text" id="passengerNameInput" placeholder="passenger firstName"/>
+                <br/>
+                <input type="text" id="passengerLastNameInput" placeholder="passenger lastName"/>
+                <br/>
+                <br/>
+            </div>;
         var passengerFields = [];
         for (var i = 0; i < this.state.numberOfSeats; i++) {
             passengerFields.push(passengerField);
         }
-        passengerFields.map((line, idx)=>{ <div key={idx}>{line}</div>});
+        passengerFields.map((line, idx) => {
+            <div key={idx}>{line}</div>
+        });
         return (
 
 
